@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/clothes")
+@RequestMapping("/clothes")
 public class ClothesController {
 
     @Autowired
@@ -20,7 +20,7 @@ public class ClothesController {
         return clothesService.getAllClothes();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/clothes/{id}")
     public ResponseEntity<Clothes> getClothesById(@PathVariable Long id) {
         Clothes clothes = clothesService.getClothesById(id)
                 .orElseThrow(() -> new RuntimeException("Clothes not found"));
@@ -32,13 +32,13 @@ public class ClothesController {
         return clothesService.saveClothes(clothes);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/clothes/{id}")
     public ResponseEntity<Clothes> updateClothes(@PathVariable Long id, @RequestBody Clothes clothesDetails) {
         Clothes updatedClothes = clothesService.updateClothes(id, clothesDetails);
         return ResponseEntity.ok(updatedClothes);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/clothes/{id}")
     public ResponseEntity<Void> deleteClothes(@PathVariable Long id) {
         clothesService.deleteClothes(id);
         return ResponseEntity.ok().build();
