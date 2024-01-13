@@ -1,12 +1,23 @@
 package com.example.whattowear.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.whattowear.model.Clothes;
+import com.example.whattowear.service.ClothesService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("/api/clothes")
 public class ClothesController {
-    @GetMapping("/hello")
-    public String helloBack(){
-        return "Hello Back!";
+
+    @Autowired
+    private ClothesService clothesService;
+
+    @GetMapping
+    public List<Clothes> getAllClothes() {
+        return clothesService.getAllClothes();
     }
+
+    // Other CRUD endpoints
 }
