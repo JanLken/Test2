@@ -13,15 +13,15 @@ import java.util.List;
 @RequestMapping("/")
 public class ClothesController {
 
-
     @Autowired
     private ClothesService clothesService;
-    ClothesRepository repo;
+
 
     @GetMapping
     public List<Clothes> getAllClothes() {
         return clothesService.getAllClothes();
     }
+
 
 /*
 @GetMapping
