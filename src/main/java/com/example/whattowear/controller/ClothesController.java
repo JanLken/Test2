@@ -1,37 +1,46 @@
 package com.example.whattowear.controller;
 
 import com.example.whattowear.model.Clothes;
-import com.example.whattowear.repository.ClothesRepository;
 import com.example.whattowear.service.ClothesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api/clothes")
 public class ClothesController {
 
     @Autowired
     private ClothesService clothesService;
-
 
     @GetMapping
     public List<Clothes> getAllClothes() {
         return clothesService.getAllClothes();
     }
 
-
-/*
-@GetMapping
-    public List<Clothes> getAll() {
-        Iterable<Clothes> iterator = repo.findAll();
-        List<Clothes> clothes = new ArrayList<Clothes>();
-        for (Clothes clothe : iterator)  clothes.add(clothe);
-        return clothes;
+    @GetMapping("/{id}")
+    public ResponseEntity<Clothes> getClothesById(@PathVariable Long id) {
+        Clothes clothes = clothesService.getClothesById(id)
+                .orElseThrow(() -> new RuntimeException("Clothes not found"));
+        return ResponseEntity.ok(clothes);
     }
-    // Other CRUD endpoints
 
- */
+    @PostMapping
+    public Clothes createClothes(@RequestBody Clothes clothes) {
+        return clothesService.saveClothes(clothes);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Clothes> updateClothes(@PathVariable Long id, @RequestBody Clothes clothesDetails) {
+        Clothes updatedClothes = clothesService.updateClothes(id, clothesDetails);
+        return ResponseEntity.ok(updatedClothes);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteClothes(@PathVariable Long id) {
+        clothesService.deleteClothes(id);
+        return ResponseEntity.ok().build();
+    }
 }

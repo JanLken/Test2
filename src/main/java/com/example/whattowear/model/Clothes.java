@@ -25,5 +25,35 @@ public class Clothes {
         return id;
     }
 
+    public String getCategory() {
+        return category;
+    }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getMaxTemp() {
+        return maxTemp;
+    }
+
+    public void setMaxTemp(Integer maxTemp) {
+        this.maxTemp = maxTemp;
+    }
+
+    public Integer getMinTemp() {
+        return minTemp;
+    }
+
+    public void setMinTemp(Integer minTemp) {
+        this.minTemp = minTemp;
+    }
 }
