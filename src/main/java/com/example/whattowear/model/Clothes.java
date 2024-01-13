@@ -25,5 +25,5 @@ public class Clothes {
         return id;
     }
 
-    // Getters and Setters
+
 }
